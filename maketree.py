@@ -1,6 +1,7 @@
 import turtle
+from tkinter import *
+import os
 
-# need a function that makes the rows
 # need a function that decides the colors
 # need a function that decides the position 
 # need a save function to store the png file
@@ -44,10 +45,16 @@ def draw_tree(artist, start_size = 20):
 		move_up_row(artist, start_size)
 		start_size -= 1
 
+def save_img(artist):
+	"saves the turtle graphic to jpg image generated with unique name"
+
+	ps =  artist.getscreen().getcanvas().postscript(file = "test.ps", colormode = 'color')
+	os.system('convert ' + 'test.ps' + ' ' + 'test.png')
+
 santa = turtle.Turtle() # creates a turtle names santa
-wn = turtle.Screen() 
 santa.hideturtle() # hides santa
 santa.speed(0)
+santa.pensize(0)
 colors = ['#228B22',
 		  '#008000',
 		  '#7CFC00',
@@ -68,6 +75,7 @@ colors = ['#228B22',
 		  '#006400',
 		  '#7CFC00',
 		  '#006400']
-draw_tree(santa)
-
-wn.mainloop()
+# draw_tree(santa)
+draw_row(santa, len(colors), colors)
+# save_img(santa)
+# os.system('open ' + 'test.png')
