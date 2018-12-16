@@ -29,9 +29,25 @@ def draw_row(artist, length, colors, size = 10):
 		draw_pixel(artist, size, colors[i], colors[i])
 		artist.forward(size)
 
+def move_up_row(artist, prevrowlength, size = 10):
+	"moves artist up to a new row to draw the tree"
+	artist.left(90)
+	artist.forward(size)
+	artist.left(90)
+	artist.forward(size * (prevrowlength))
+	artist.left(180)
+	artist.forward(size//2)
+
+def draw_tree(artist, start_size = 20):
+	while start_size != 0:
+		draw_row(artist, start_size, colors[:start_size])
+		move_up_row(artist, start_size)
+		start_size -= 1
+
 santa = turtle.Turtle() # creates a turtle names santa
 wn = turtle.Screen() 
 santa.hideturtle() # hides santa
+santa.speed(0)
 colors = ['#228B22',
 		  '#008000',
 		  '#7CFC00',
@@ -48,6 +64,10 @@ colors = ['#228B22',
 		  '#228B22',
 		  '#008000',
 		  '#32CD32',
+		  '#006400',
+		  '#006400',
+		  '#7CFC00',
 		  '#006400']
-draw_row(santa, len(colors), colors)
+draw_tree(santa)
+
 wn.mainloop()
