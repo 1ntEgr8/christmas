@@ -3,15 +3,11 @@ from tkinter import *
 import os
 import random
 
-# need a function that decides the colors
-# need a function that decides the position 
-# need a save function to store the png file
 # need a function to delete the eps file
 
 
 # add functions that determine the color scheme for a row
 # add functions that store necessary data onto a file
-# think about how to get the stochastic matrix
 
 
 # DRAWING FUNCTIONS
@@ -46,12 +42,15 @@ def move_up_row(artist, prevrowlength, size = 10):
 	artist.forward(size//2)
 
 def draw_tree(artist, colors, start_size = 20):
+	"this function draws the christmas tree"
+
 	while start_size != 0:
 		draw_row(artist, start_size, colors[20-start_size])
 		move_up_row(artist, start_size)
 		start_size -= 1
 
 def draw_trunk(artist, colors  = ['brown', 'brown', 'brown'], size = 10, length = 2):
+	"this function draws a trunk for the tree"
 
 	for i in range(4):
 		random.shuffle(colors)
@@ -63,12 +62,16 @@ def draw_trunk(artist, colors  = ['brown', 'brown', 'brown'], size = 10, length 
 		artist.left(180)
 
 def draw_circle(artist):
+	"this function draws a yellow circle on top of the tree"
+
 	artist.color('orange','yellow')
 	artist.begin_fill()
 	artist.circle(7)
 	artist.end_fill()
 
 def draw_greeting(artist):
+	"this function writes the greeting on top"
+
 	artist.penup()
 	artist.left(90)
 	artist.forward(100)
@@ -80,6 +83,8 @@ def draw_greeting(artist):
 	artist.write("Merry Christmas", font = ('Times', 50, 'bold'))
 
 def draw_recepient(artist):
+	"this function writes the name of the recepient"
+
 	artist.penup()
 	artist.setpos(0,-80)
 	artist.left(90)
@@ -93,6 +98,8 @@ def draw_recepient(artist):
 
 
 def draw_signature(artist):
+	"this function writes a signtaure at the bottom"
+
 	artist.penup()
 	artist.color('blue')
 	artist.setpos(0,-80)
@@ -188,6 +195,8 @@ def add_bobtails(ls):
 
 	return ls
 
+# HASH FUNCTIONS
+
 def create_hash():
 	pass
 
@@ -220,24 +229,11 @@ main_colors = {
 	      13:'#D2691E'  # chocolate
 		 }
 
-# green_colors = ['#228B22', # forestgreen
-# 				'#008000', # green
-# 				'#006400', # darkgreen
-# 				'#2E8B57', # seagreen
-# 				'#6B8E23', # darkolivegreen
-# 				'#556B2F', # olivedrab
-# 				]
-
-# bobtail_colors = ['#FFA500', # orange
-# 				  '#00BFFF', # deepskyblue
-# 				  '#DC143C', # crimson
-# 				  '#EE82EE' # violet
-# 				 ]
-
-
+#---- INIT ---- #
 
 wn = turtle.Screen()
 santa = turtle.Turtle() # creates a turtle names santa
+
 santa.penup()
 santa.hideturtle() # hides santa
 santa.setpos(0,-80)
