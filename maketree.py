@@ -2,6 +2,8 @@ import turtle
 from tkinter import *
 import os
 import random
+import time
+import datetime
 
 # need a function to delete the eps file
 
@@ -12,7 +14,7 @@ import random
 
 # DRAWING FUNCTIONS
 def draw_pixel(artist, size = 10, pencolor = 'black', fillcolor = 'white'):
-	"draws a pixel of given size with pencolor and fillcolor"
+	"""draws a pixel of given size with pencolor and fillcolor"""
 
 	artist.color(pencolor,fillcolor) # sets fill colors
 	artist.begin_fill() 
@@ -25,7 +27,7 @@ def draw_pixel(artist, size = 10, pencolor = 'black', fillcolor = 'white'):
 	artist.end_fill()
 
 def draw_row(artist, length, colors, size = 10):
-	"draws a row of pixel with length number of pixels. the color of each pixel is passed in as a list"
+	"""draws a row of pixel with length number of pixels. the color of each pixel is passed in as a list"""
 
 	for i in range(length):
 		color = main_colors[colors[i]]
@@ -33,7 +35,7 @@ def draw_row(artist, length, colors, size = 10):
 		artist.forward(size)
 
 def move_up_row(artist, prevrowlength, size = 10):
-	"moves artist up to a new row to draw the tree"
+	"""moves artist up to a new row to draw the tree"""
 	artist.left(90)
 	artist.forward(size)
 	artist.left(90)
@@ -42,7 +44,7 @@ def move_up_row(artist, prevrowlength, size = 10):
 	artist.forward(size//2)
 
 def draw_tree(artist, colors, start_size = 20):
-	"this function draws the christmas tree"
+	"""this function draws the christmas tree"""
 
 	while start_size != 0:
 		draw_row(artist, start_size, colors[20-start_size])
@@ -50,7 +52,7 @@ def draw_tree(artist, colors, start_size = 20):
 		start_size -= 1
 
 def draw_trunk(artist, colors  = ['brown', 'brown', 'brown'], size = 10, length = 2):
-	"this function draws a trunk for the tree"
+	"""this function draws a trunk for the tree"""
 
 	for i in range(4):
 		random.shuffle(colors)
@@ -62,7 +64,7 @@ def draw_trunk(artist, colors  = ['brown', 'brown', 'brown'], size = 10, length 
 		artist.left(180)
 
 def draw_circle(artist):
-	"this function draws a yellow circle on top of the tree"
+	"""this function draws a yellow circle on top of the tree"""
 
 	artist.color('orange','yellow')
 	artist.begin_fill()
@@ -70,7 +72,7 @@ def draw_circle(artist):
 	artist.end_fill()
 
 def draw_greeting(artist):
-	"this function writes the greeting on top"
+	"""this function writes the greeting on top"""
 
 	artist.penup()
 	artist.left(90)
@@ -83,7 +85,7 @@ def draw_greeting(artist):
 	artist.write("Merry Christmas", font = ('Times', 50, 'bold'))
 
 def draw_recepient(artist):
-	"this function writes the name of the recepient"
+	"""this function writes the name of the recepient"""
 
 	artist.penup()
 	artist.setpos(0,-80)
@@ -98,7 +100,7 @@ def draw_recepient(artist):
 
 
 def draw_signature(artist):
-	"this function writes a signtaure at the bottom"
+	"""this function writes a signtaure at the bottom"""
 
 	artist.penup()
 	artist.color('blue')
@@ -116,7 +118,7 @@ def draw_signature(artist):
 # POSITIONING FUNCTIONS
 
 def position_trunk(artist, size = 10):
-	"positions the artist so that the trunk can be drawn in the correct position"
+	"""positions the artist so that the trunk can be drawn in the correct position"""
 
 	artist.penup()
 	artist.right(90)
@@ -125,7 +127,7 @@ def position_trunk(artist, size = 10):
 	artist.pendown()
 
 def position_tree(artist, size = 10):
-	"positions the artist so that the tree can be drawn in the correct position"
+	"""positions the artist so that the tree can be drawn in the correct position"""
 
 	artist.penup()
 	artist.left(180)
@@ -136,7 +138,7 @@ def position_tree(artist, size = 10):
 # COLOR DETERMINATION FUNCTIONS
 
 def add_greenrows():
-	"creates a list of lists with color combinations for shades of green"
+	"""creates a list of lists with color combinations for shades of green"""
 
 	green_rows = []
 
@@ -147,7 +149,7 @@ def add_greenrows():
 
 
 def add_bobtails(ls):
-	"creates a list of lists that adds bobtail colors to the list returned by add_greenrows()"
+	"""creates a list of lists that adds bobtail colors to the list returned by add_greenrows()"""
 
 	bobtail_rows = []
 	count = 0
@@ -197,8 +199,83 @@ def add_bobtails(ls):
 
 # HASH FUNCTIONS
 
-def create_hash():
-	pass
+def modify_treecolormatrix(ls):
+	"""this function takes in the treecolormatrix and appends zeros at the end of each list so as
+	 to get a 20x20 matrix. It then returns this matrix"""
+
+	return_ls = []
+
+	for i in range(len(ls)):
+		return_ls.append(ls[i])
+		if len(ls[i]) != 20:
+			while len(return_ls) != 20:
+				return_ls[i].append(0)
+	return return_ls	
+
+def matrixvector_multiply(a, x):
+	"""takes a matrix and a vector represented as a list of list and multiplies them"""
+
+	if len(a[0]) == len(x):
+		product = []
+
+		for i in range(len(a)):
+			product.append(0)
+			for j in range(len(x)):
+				product[i] += a[i][j]*x[j]
+		return product 
+	else:
+		return """ Multiplication cannot be carried out because the number of rows of the matrix 'a' is 
+					not equal to the number of columns of the vector 'x' """
+
+def create_hash(ls):
+	"""this function takes in the treecolor matrix and creates a hash vector that 
+	identifies a particular combination of colors"""
+
+	index_vector = [x for x in range(20)] # creates a vector of the indexes
+
+	return matrixvector_multiply(modify_treecolormatrix(ls), index_vector)
+
+def store_hash(hash_code, treecolormatrix, creator_number, recepient_number, time_taken):
+	"""This function stores the hash generated by create_hash() in a file named patterns.json
+	The hash is passed into the function"""
+
+
+	##### >>>>>> PLEASE ALTER THIS >>>>>>> #######
+
+	# FORMAT OF DATA AS STORED ON THE FILE
+
+	# each hash will be stored in the form of a dictionary
+	# the dictionary will have the following keys:
+	# 	* hash
+	#   * date_created
+	#   * time_taken
+	#   * recepient_number
+	#   * creator_number
+	#   * treecolormatrix
+
+
+	data_entry_dict = {}
+	data_entry_dict['hash'] = hash_code
+	data_entry_dict['treecolormatrix'] = treecolormatrix
+	data_entry_dict['creator_number'] = creator_number
+	data_entry_dict['recepient_number'] = recepient_number
+	data_entry_dict['date'] = datetime.datetime.now()
+	data_entry_dict['time_taken'] = time_taken
+
+	with open("patterns.json", 'a+') as file:
+
+		if file.readline() != '[':
+			file.seek(0,0)
+			file.write('[')
+		if file.read()[-1] != ']':
+			file.seek(0,2)
+			file.write(']')
+
+		file.seek(1,2)
+		file.readline()
+		file.write(data_entry_dict)
+		file.write(',')
+
 
 def next_pattern():
 	pass
@@ -206,7 +283,7 @@ def next_pattern():
 # SAVE IMAGE
 
 def save_img(artist):
-	"saves the turtle graphic to jpg image generated with unique name"
+	"""saves the turtle graphic to jpg image generated with unique name"""
 
 	ps =  artist.getscreen().getcanvas().postscript(file = "test.ps", colormode = 'color')
 	os.system('convert ' + 'test.ps' + ' ' + 'test.png')
@@ -229,6 +306,7 @@ main_colors = {
 	      13:'#D2691E'  # chocolate
 		 }
 
+# THEMATRIX
 thematrix = {
 			(0,0): 1,
 			(6,0): 1,
@@ -293,6 +371,7 @@ thematrix = {
 			(19,18): 3,
 			(19,19): 9
 		    }
+
 #---- INIT ---- #
 
 wn = turtle.Screen()
