@@ -351,9 +351,7 @@ def alpha():
 
 def init_session(creator_name, recepients, time_of_request = 0):
 	"""this function is to be called whenever a new user makes a request to send greetings to no_of_requests recepients"""
-
-	global creator_number
-	global recepient_number
+	
 	wn = turtle.Screen()
 	santa = turtle.Turtle() # creates a turtle names santa
 
@@ -361,12 +359,12 @@ def init_session(creator_name, recepients, time_of_request = 0):
 	flag = True
 
 	# get creator number
-	# creator_number = get_creator_number()
+	creator_number = get_creator_number()
 
 	for recepient in recepients:
 
 		# t1
-		t1 = time.clock()
+		t1 = time.time()
 
 		# positioning santa
 		santa.penup()
@@ -400,13 +398,13 @@ def init_session(creator_name, recepients, time_of_request = 0):
 		draw_signature(santa, creator_name)
 
 		# get recepient number
-		# recepient_number = get_recepient_number()
+		recepient_number = get_recepient_number()
 
 		# store image
 		save_img(santa)
 
 		#t2
-		t2 = time.clock()
+		t2 = time.time()
 
 		# store hash for treecolor matrix
 		hash_code, hash_vector = create_hash(treecolormatrix)
@@ -416,8 +414,6 @@ def init_session(creator_name, recepients, time_of_request = 0):
 		recepient_number_list.append(recepient_number)
 
 		santa.clear()
-		creator_number+=1
-		recepient_number+=1
 
 	# # store request data
 	# store_request_data(creator_name, creator_number, recepients, recepient_number_list)
@@ -442,7 +438,7 @@ def store_hash(hash_code, hash_vector, treecolormatrix, creator_number, recepien
 	data_entry_dict['treecolormatrix'] = treecolormatrix
 	data_entry_dict['creator_number'] = creator_number
 	data_entry_dict['recepient_number'] = recepient_number
-	#data_entry_dict['date'] = datetime.datetime.now()
+	data_entry_dict['date'] = str(datetime.datetime.now())
 	data_entry_dict['time_taken'] = time_taken
 
 	try:
@@ -459,20 +455,20 @@ def store_hash(hash_code, hash_vector, treecolormatrix, creator_number, recepien
 def store_request_data(creator_name, creator_number, recepients, recepient_number_list):
 	pass
 
-# def get_creator_number():
-# 	""" Updates creator_number and returns a zero padded string"""
-	
-# 	global creator_number
-# 	creator_number += 1
-# 	return str(creator_number).zfill(6)
 
-# def get_recepient_number():
-#  	""" Updates recepient_number and returns a zero padded string"""
-    
-#     global recepient_number
+def get_creator_number():
+	""" Updates creator_number and returns a zero padded string"""
 
-# 	recepient_number += 1
-# 	return str(recepient_number).zfill(6)
+	global creator_number
+	creator_number += 1
+	return str(creator_number).zfill(6)
+
+def get_recepient_number():
+	""" Updates recepient_number and returns a zero padded string"""
+
+	global recepient_number
+	recepient_number += 1
+	return str(recepient_number).zfill(6)
 
 # RESET
 
@@ -533,58 +529,8 @@ thematrix = [[0.0, 0.03333333333333333, 0.05, 0.06666666666666667, 0.06666666666
              [0.1, 0.05, 0.15, 0.05, 0.03333333333333333, 0.08333333333333333, 0.06666666666666667, 0.08333333333333333, 0.08333333333333333, 0.08333333333333333, 0.05, 0.05, 0.06666666666666667, 0.08333333333333333, 0.06666666666666667, 0.06666666666666667, 0.016666666666666666, 0.06666666666666667, 0.06666666666666667, 0.06666666666666667], 
              [0.06666666666666667, 0.0, 0.15, 0.05, 0.06666666666666667, 0.08333333333333333, 0.06666666666666667, 0.08333333333333333, 0.08333333333333333, 0.0, 0.0, 0.05, 0.05, 0.016666666666666666, 0.05, 0.05, 0.06666666666666667, 0.03333333333333333, 0.05, 0.03333333333333333]]
 
-#---- INIT ---- #
 
-# wn = turtle.Screen()
-# santa = turtle.Turtle() # creates a turtle names santa
-
-# santa.penup()
-# santa.hideturtle() # hides santa
-# santa.setpos(0,-80)
-# santa.speed(0)
-# santa.pensize(0)
-# santa.pendown()
-
-# position_trunk(santa)
-# draw_trunk(santa, list(main_colors.keys())[-4:], length = 3, )
-# position_tree(santa)
-# product = add_bobtails(add_greenrows())
-# draw_tree(santa,product)
-# product = modify_treecolormatrix(product)
-# draw_circle(santa)
-# draw_greeting(santa)
-# draw_recepient(santa)
-# draw_signature(santa)
-
-# # save_img(santa)
-
-
-# for row in product:
-# 	print(row)
-
-# product.reverse()
-
-# new_product = modify_matrixproduct(matrix_multiply(thematrix, product))
-# new_product = add_bobtails(new_product)
-# santa.penup()
-# santa.hideturtle() # hides santa
-# santa.setpos(0,-80)
-# santa.speed(0)
-# santa.pensize(0)
-# santa.pendown()
-
-# position_trunk(santa)
-# draw_trunk(santa, list(main_colors.keys())[-4:], length = 3, )
-# position_tree(santa)
-# draw_tree(santa,new_product)
-# draw_circle(santa)
-# draw_greeting(santa)
-# draw_recepient(santa)
-# draw_signature(santa)
-
-# save_img(santa)
-
-# init_session("Elton", ["Evonne", "Mama", "Dada", "bongocat", "boom", "toy"])
+init_session("Elton", ["Evonne", "Mama", "Dada", "bongocat", "boom", "toy"])
 
 
 
