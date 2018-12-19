@@ -56,16 +56,10 @@ m2 = [[0, 2, 3, 4, 4, 3, 4, 0, 3, 3, 3, 4, 3, 0, 2, 1, 5, 4, 2, 5],
 [7, 2, 2, 3, 4, 3, 5, 5, 5, 5, 3, 3, 0, 5, 2, 5, 3, 4, 0, 4],
 [6, 3, 9, 3, 2, 5, 4, 5, 5, 5, 3, 3, 4, 5, 4, 4, 1, 4, 4, 4],
 [4, 0, 9, 3, 4, 5, 4, 5, 5, 0, 0, 3, 3, 1, 3, 3, 4, 2, 3, 2]]
-column_vectors = []
-
-for i in range(len(m2[0])):
-	new_column = []
-	for row in m2:
-		new_column.append(row[i]/60)
-	column_vectors.append(new_column)
 
 
-for column in column_vectors:
-	print(column)
-	print(sum(column))
+for i in range(len(m2)):
+	for j in range(len(m2[i])):
+		m2[i][j]/=60
 
+print(m2)
