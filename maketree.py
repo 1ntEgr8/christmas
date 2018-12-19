@@ -6,8 +6,6 @@ import time
 import datetime
 import json
 
-# fix creator_number and recepient_number problems
-# fix storing date and time onto the json file
 
 creator_number = 0
 recepient_number = 0
