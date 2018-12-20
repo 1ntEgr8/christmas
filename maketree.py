@@ -332,7 +332,7 @@ def next_pattern(ls):
 # SAVE IMAGE
 
 def save_img(artist):
-	"""saves the turtle graphic to png image generated with unique name"""
+	"""saves the turtle graphic to jpg image generated with unique name"""
 
 	global creator_number
 	global recepient_number
@@ -340,7 +340,10 @@ def save_img(artist):
 	filename = str(creator_number) + "_" + str(recepient_number)
 
 	ps =  artist.getscreen().getcanvas().postscript(file = filename + ".ps", colormode = 'color')
-	os.system('convert ' + filename + '.ps' + ' ' + filename + '.png')
+	os.system('convert ' + filename + '.ps' + ' ' + filename + '.jpg')
+	os.system('rm ' + filename + '.ps')
+	os.system('mv ' + filename + '.jpg' + ' static/gift_generated')
+
 
 # INIT AND DATA STORAGE FUNCTIONS
 
