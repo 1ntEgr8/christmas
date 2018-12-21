@@ -6,9 +6,10 @@ import time
 import datetime
 import json
 
-
 creator_number = 0
 recepient_number = 0
+
+# implement multithreading and fix that issue
 
 # DRAWING FUNCTIONS
 def draw_pixel(artist, size = 10, pencolor = 'black', fillcolor = 'white'):
@@ -342,7 +343,7 @@ def save_img(artist):
 	ps =  artist.getscreen().getcanvas().postscript(file = filename + ".ps", colormode = 'color')
 	os.system('convert ' + filename + '.ps' + ' ' + filename + '.jpg')
 	os.system('rm ' + filename + '.ps')
-	os.system('mv ' + filename + '.jpg' + ' static/gift_generated')
+	os.system('mv ' + filename + '.jpg' + ' surprise/static/gift_generated')
 
 
 # INIT AND DATA STORAGE FUNCTIONS
