@@ -5,6 +5,7 @@ from surprise import app, db
 from surprise import maketree
 from datetime import datetime
 import hashlib
+import time
 
 # change the format of the recepient list
 # get that logic done for today, 
@@ -38,7 +39,7 @@ def send():
 @app.route('/add', methods=['GET','POST'])
 def add():
 	user = Creator.query.filter_by(id=session.get('user-id',0)).first()
-	if user and not user.created:
+	if user and not user.sent:
 		if request.method == 'POST':
 			names = request.form
 			print(names)
@@ -57,8 +58,8 @@ def add():
 					db.session.add(recepient)
 					db.session.commit()
 					count+=1
-					user.created=True
-			return url_for('link')
+					user.sent=True
+			return redirect(url_for('link'))
 	else:
 		return redirect(url_for('home'))
 	return render_template('add.html')
@@ -71,15 +72,15 @@ def link():
 
 @app.route('/receive/<string:first_name>/<int:user_id>', methods=['GET','POST'])
 def receive(first_name, user_id):
-	url = request.path
-	name = url[url.find('/',1,len(url)):url.rfind('/')]
-	userid = int(url[url.rfind('/')+1:])
-	recepient = Recepient.query.filter_by(creator_id=user_id).first()
-	print(recepient)
-	if recepient:
-		print('yea')
-		maketree.init_session(name, ['Mama'])
-	return render_template('index.html')
+	path = request.path
+	creator_id = path[path.rfind('/')+1:]
+	user = Creator.query.filter_by(id=creator_id).first()
+
+	#add some validators
+	name = user.first_name
+	if request.method == 'POST':
+		form = request.form
+	return render_template('receive.html', first_name=name)
 
 @app.route('/donate', methods=['POST'])
 def donate():

@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Recepient Name</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Santa will check to see if your'e on {{first_name}}'s recepient list">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

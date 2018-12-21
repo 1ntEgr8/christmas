@@ -57,7 +57,7 @@ $(document).ready(function boxes(){
         $.ajax({
           type: "POST",
           contentType: "application/json;charset=utf-8",
-          url: "/add",
+          url: "/",
           traditional: "true",
           data: {'names': JSON.stringify({names})},
           dataType: "json"

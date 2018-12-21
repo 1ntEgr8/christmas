@@ -6,8 +6,6 @@ import time
 import datetime
 import json
 
-creator_number = 0
-recepient_number = 0
 
 # implement multithreading and fix that issue
 
@@ -332,13 +330,10 @@ def next_pattern(ls):
 
 # SAVE IMAGE
 
-def save_img(artist):
+def save_img(artist, id1, id2):
 	"""saves the turtle graphic to jpg image generated with unique name"""
 
-	global creator_number
-	global recepient_number
-
-	filename = str(creator_number) + "_" + str(recepient_number)
+	filename = str(id1) + "_" + str(id2)
 
 	ps =  artist.getscreen().getcanvas().postscript(file = filename + ".ps", colormode = 'color')
 	os.system('convert ' + filename + '.ps' + ' ' + filename + '.jpg')
@@ -351,7 +346,7 @@ def save_img(artist):
 def alpha():
 	pass
 
-def init_session(creator_name, recepients, time_of_request = 0):
+def init_session(creator_name, recepients, id1=1, id2=1, time_of_request = 0):
 	"""this function is to be called whenever a new user makes a request to send greetings to no_of_requests recepients"""
 	
 	wn = turtle.Screen()
@@ -361,7 +356,7 @@ def init_session(creator_name, recepients, time_of_request = 0):
 	flag = True
 
 	# get creator number
-	creator_number = get_creator_number()
+	#creator_number = get_creator_number()
 
 	for recepient in recepients:
 
@@ -400,20 +395,20 @@ def init_session(creator_name, recepients, time_of_request = 0):
 		draw_signature(santa, creator_name)
 
 		# get recepient number
-		recepient_number = get_recepient_number()
+		# recepient_number = get_recepient_number()
 
 		# store image
-		save_img(santa)
+		save_img(santa, id1, id2)
 
 		#t2
 		t2 = time.time()
 
 		# store hash for treecolor matrix
 		hash_code, hash_vector = create_hash(treecolormatrix)
-		store_hash(hash_code, hash_vector, treecolormatrix, creator_number, recepient_number, t2-t1)	
+		store_hash(hash_code, hash_vector, treecolormatrix, id1, id2, t2-t1)	
 
 		# update request data to be stored
-		recepient_number_list.append(recepient_number)
+		#recepient_number_list.append(recepient_number)
 
 		santa.clear()
 
@@ -458,38 +453,38 @@ def store_request_data(creator_name, creator_number, recepients, recepient_numbe
 	pass
 
 
-def get_creator_number():
+#def get_creator_number():
 	""" Updates creator_number and returns a zero padded string"""
 
-	global creator_number
-	creator_number += 1
-	return str(creator_number).zfill(6)
+	# global creator_number
+	# creator_number += 1
+	# return str(creator_number).zfill(6)
 
-def get_recepient_number():
+#def get_recepient_number():
 	""" Updates recepient_number and returns a zero padded string"""
 
-	global recepient_number
-	recepient_number += 1
-	return str(recepient_number).zfill(6)
+	# global recepient_number
+	# recepient_number += 1
+	# return str(recepient_number).zfill(6)
 
 # RESET
 
-def reset_requst_data():
-	""" Resets the value of creator_number and recepient_number to zero"""
+# def reset_requst_data():
+# 	""" Resets the value of creator_number and recepient_number to zero"""
 
-	global creator_number
-	global recepient_number
+# 	global creator_number
+# 	global recepient_number
 
-	creator_number = 0
-	recepient_number = 0
+# 	creator_number = 0
+# 	recepient_number = 0
 
-	# empty request_data.json
-	with open("request_data.json", 'w') as file:
-		pass
+# 	# empty request_data.json
+# 	with open("request_data.json", 'w') as file:
+# 		pass
 
 # WARNING: CALL THIS IF YOU WANT TO DELETE ALL DATA AND START AFRESH
-def omega():
-	pass
+def end():
+	quit()
 
 main_colors = {
 		  0:'#228B22', # forestgreen
