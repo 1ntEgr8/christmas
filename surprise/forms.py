@@ -8,7 +8,6 @@ class RegistrationForm(FlaskForm):
 	first_name = StringField('First Name', validators=[DataRequired(), Length(min=2, max=20)])
 	last_name = StringField('Last Name', validators=[DataRequired(), Length(min=2, max=20)])
 	email = StringField('Email', validators=[DataRequired(), Email()])
-	no_of_recepients = IntegerRangeField('No of Recepients', validators=[DataRequired()])
 	submit = SubmitField("Let's add your recepients ->")
 
 	def validate_email(self, email):
@@ -17,4 +16,5 @@ class RegistrationForm(FlaskForm):
 			raise ValidationError('That email has already been taken :( ')
 
 class AddRecepientForm(FlaskForm):
+	recepient_name = StringField()
 	submit = SubmitField("Submit your order to Santa!")

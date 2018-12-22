@@ -1,7 +1,27 @@
 {% extends 'layout.html' %}
 
 {% block body%}
-	<h1>Santa has received your order!</h1>
-	<h2>Here is your shareable link</h2>
-	<p>localhost:5000/receive/{{first_name}}/{{user_id}}</p>
+	<div class='jumbotron bg-success'>
+		<h1 class='d-flex justify-content-center text-white'>Santa has received your order!</h1>
+	</div>
+	<div class='jumbotron pb-4 pt-4 bg-white'>
+		<h3 class='d-flex justify-content-center text-black'>Send this link to your recepients</h3>
+	</div>
+	<div class='jumbotron mt-4 bg-warning'>
+		<div class='container pr-5 pl-5 col-5'>
+		<div class='input-group'>
+		<input id="foo" class='form-control' value='localhost:5000/receive/{{first_name}}/{{user_id}}'>
+		<div class="input-group-append" id="button-addon4">
+			<button class="btn btn-primary" data-clipboard-text="localhost:5000/receive/{{first_name}}/{{user_id}}">
+   			 	Copy
+			</button>
+		</div>
+		</div>
+	</div>
+</div>
+<div class='jumbotron pt-3 pb-3 bg-success'>
+
+	<div class='container pb-3 pt-3 mb-2'><h3 class='d-flex justify-content-center text-white'>To continue speading the joy of Christmas, <a href="{{url_for('donate')}}" class='ml-2 mr-2 badge badge-pill badge-primary'>donate $1</a> to xyz organisation!</h3></div>
+	<h5 class='d-flex justify-content-center text-white'>Wanna learn how this tool works? Check out the <a href="https://github.com/1ntEgr8/surprise" class='ml-2 mr-2 badge badge-pill badge-info' target='_blank'>github repo</a></h5>
+</div>
 {% endblock%}

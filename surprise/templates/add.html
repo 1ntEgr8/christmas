@@ -2,18 +2,27 @@
 
 {% block body%} 
 
+<div class='container mt-4 mb-5 bg-info'>
+    <h1 class='pt-3 pb-3 d-flex justify-content-center text-white'>Recepient List</h1>
+</div>
+<div class ='container'>
   <form action="/add" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" />
 
         <div id='TextBoxesGroup'>
-        <div id="TextBoxDiv1">
-            <label>Name #1 : </label><input type='textbox' id='textbox1' name ='mytext'>
+        <div id="TextBoxDiv1" class='form-group'>
+            <input class = 'form-control' type='textbox' id='textbox1' name ='mytext' placeholder="Send one to {{creator_sender}}. Type in the name!">
         </div>
         </div>
-        <input type='button' value='Add Name' id='addButton'>
-        <input type='button' value='Remove Name' id='removeButton'>
-
-        <input type="submit" value="Submit" id='submit'>
+        <div class='row'>
+            <div class='col'>
+                 <input class ='form-control btn-success' type='button' value='Add' id='addButton'>
+            </div>
+            <div class='col'>
+                 <input  class ='form-control btn-danger'type='button' value='Remove' id='removeButton'>
+            </div>
+        </div>
+        <input class ='form-control btn-warning mt-3' type="submit" value="Looks good to me Santa! SUBMIT" id='submit'>
     </form>
+</div>
       
 {% endblock %}

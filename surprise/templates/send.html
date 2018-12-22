@@ -89,11 +89,6 @@
        <small id="emailHelp" class="form-text text-warning">santa will never share your email with anyone else.</small>
   </div>
     <div class='form-group'>
-      {{ form.no_of_recepients.label( class='form-control-label text-light') }}
-      {{ form.no_of_recepients(min=1, max=10, oninput="outputUpdate(value)", class='form-control') }}
-     <output for='no_of_recepients' id='selected' class='text-light'>{{form.no_of_recepients.data}}</output>
-    </div>
-    <div class='form-group'>
       {{ form.submit(class='btn btn-warning') }}
     </div>
   </fieldset>

@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<div class='jumbotron bg-success'>
+	<h1 id='message' class='d-flex justify-content-center pt-5 pb-5 text-white'>🎉 Found your Gift!!! 🎉</h1>
+	</div>
+	<div class='container col-1 pt-5'>
+	<div id = 'loader' class='loader'></div>
+	</div>
+
+<script type="text/javascript">
+	list_of_messages=['🧝 Sending elves to package your gift... 🧝', 
+						'🎄 Reindeers have begun their journey from the North Pole... 🎄',
+						  '🎅 Almost there...🎅 ',
+						  "IT'S ARRIVED!!!"
+						 ];
+	list_of_colors=['bg-light',
+					'bg-warning',
+					'bg-light',
+					'bg-warning'
+					]
+	list_of_text_colors=['dark',
+						'white',
+						'dark',
+						'white'
+						]
+		let counter = 0;
+		element = document.querySelector('#message')
+
+		function change_message(){
+			console.log(list_of_messages[counter])
+			console.log(counter)
+			element.innerHTML=list_of_messages[counter];
+			element.className="d-flex justify-content-center pt-5 pb-5 text-" + list_of_text_colors[counter]
+			divele = document.querySelector('.jumbotron');
+			divele.className='jumbotron ' + list_of_colors[counter];
+			counter+=1;
+			if(counter==list_of_messages.length){
+				clearInterval(myVar);
+				load = document.querySelector('#loader')
+				load.style.display='none';
+				document.body.innerHTML="<div class='jumbotron bg-success'><h1 id='message' class='d-flex justify-content-center pt-5 pb-5 text-white'>🎊 IT'S ARRIVED!!! 🎊</h1></div> <div class='container'><button type='button' class='btn btn-primary btn-lg btn-block'>🎁 Click here to see your gift! 🎁</button></div>";
+				press_button = document.querySelector('button')
+				press_button.onclick=display_image
+			}
+		}
+
+		function display_image(){
+			document.body.innerHTML="<img src='{{url_for('static', filename=image_file)}}'>"
+		}
+
+		myVar = setInterval(change_message, 5000);
+
+		
+
+</script>
+{% endblock %}
+
+
+		

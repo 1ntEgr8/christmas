@@ -21,8 +21,7 @@ $(document).ready(function boxes(){
   var newTextBoxDiv = $(document.createElement('div'))
        .attr("id", 'TextBoxDiv' + counter);
 
-  newTextBoxDiv.after().html('<label>Name #'+ counter + ' : </label>' +
-        '<input type="text" name="textbox' + counter +
+  newTextBoxDiv.after().html('<input class = "form-control mb-3" type="text" name="textbox' + counter +
         '" id="textbox' + counter + '" value="" >');
 
   newTextBoxDiv.appendTo("#TextBoxesGroup");
@@ -32,7 +31,7 @@ $(document).ready(function boxes(){
      });
 
      $("#removeButton").click(function () {
-  if(counter==1){
+  if(counter==2){
           alert("No more names to remove");
           return false;
        }

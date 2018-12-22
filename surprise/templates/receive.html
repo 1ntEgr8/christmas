@@ -1,11 +1,21 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Recepient Name</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Santa will check to see if your'e on {{first_name}}'s recepient list">
+<div class='jumbotron bg-success'>
+	<h1 class='d-flex justify-content-center text-white'>Recepient Check-in ☑️</h1>
+</div>
+<div class='container pt-5 mt-4 mb-4'>
+	<h3 class='d-flex justify-content-center text-white'>Enter your first name below</h3>
+</div>
+<div class='container'>
+<form action='' method='POST'>
+  <div class="input-group">
+    <input name='recepient_name' type="textbox" class="form-control" placeholder="Santa will check to see if your'e on {{first_name}}'s recepient list">
+ <div class="input-group-append" id="button-addon4">
+  <button type="submit" class="btn btn-primary ">Submit</button>
+</div>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <small class='text-warning'>Make sure to capitalize the first letter of your first name</small>
 </form>
+</div>
 {% endblock %}
