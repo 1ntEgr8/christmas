@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<div class='jumbotron'>
+		<h1>Your gift is still being processed</h1>
+		<p>The elves are working real hard with Santa to get your gift ready.</p>
+		<p>Santa hadn't anticipated to receive so many requests in the first year of providing this service</p>
+		<p>For now, please enter your email below. Santa will notify you as soon as your gift is ready!</p>
+		<p>Sorry for the inconvenience caused</p>
+	</div>
+	<div class="container">
+		<form action='' method='POST'>
+			<div class='input-group'>
+				<input name='recepient_name' type="textbox" class="form-control" placeholder='Enter your email address'>
+			<div class="input-group-append" id="button-addon4">
+  				<button type="submit" class="btn btn-primary ">Submit</button>
+			</div>
+			</div>
+		</form>
+	</div>
+{% endblock %}

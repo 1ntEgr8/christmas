@@ -26,7 +26,8 @@ def send():
 	if form.validate_on_submit():
 		user = Creator(first_name=form.first_name.data, 
 					   last_name=form.last_name.data,
-					   email=form.email.data)
+					   email=form.email.data,
+					   request_time=datetime.utcnow())
 		db.session.add(user)
 		db.session.commit()
 		session['first_name'] = form.first_name.data
@@ -52,11 +53,15 @@ def add():
 			for name in names:
 				print(names[name])
 				print("ADDING RECEPIENT")
+				date_posted=datetime.utcnow()
 				recepient = Recepient(recepient_name=names[name],
-									  date_posted=datetime.utcnow(),
-									  image_file='gift_generated/'+str(session['user-id'])+'_'+str(count)+'.jpg',
+									  date_posted=date_posted,
 									 creator_id=session['user-id'])
 				db.session.add(recepient)
+				db.session.commit()
+				recepient = Recepient.query.filter_by(date_posted=date_posted).first()
+
+				recepient.image_file='gift_generated/'+str(session['user-id'])+'_'+str(recepient.id)+'.jpg'
 				db.session.commit()
 				count+=1
 				user.sent=True
@@ -83,17 +88,28 @@ def receive(first_name, user_id):
 		entered_name = request.form['recepient_name']
 		recepient = Recepient.query.filter_by(recepient_name=entered_name, creator_id=creator_id).first()
 		if recepient:
-			return redirect(url_for('load', first_name=name, user_id=creator_id))
+			if recepient.image_created:
+				return redirect(url_for('load', first_name=name, user_id=creator_id, recepient_name=entered_name, recepient_id=recepient.id))
+			else:
+				return redirect(url_for('noimage', first_name=name, user_id=creator_id))
 		else:
 			return redirect(url_for('sad'))
 	return render_template('receive.html', first_name=name)
 
-@app.route('/load/<string:first_name>/<int:user_id>')
-def load(first_name, user_id):
+@app.route('/load/<string:first_name>/<int:user_id>/<string:recepient_name>/<int:recepient_id>')
+def load(first_name, user_id, recepient_name, recepient_id):
+	path = request.path
+	recepientid = path[path.rfind('/')+1:]
+	recepient = Recepient.query.filter_by(id=recepientid).first()
+	image_file = recepient.image_file
+	return render_template('load.html', image_file=image_file)
+
+@app.route('/noimage/<string:first_name>/<int:user_id>', methods=['GET','POST'])
+def noimage(first_name, user_id):
 	path = request.path
 	creator_id = path[path.rfind('/')+1:]
-	image_file = Recepient.query.filter_by(creator_id=creator_id).first().image_file
-	return render_template('load.html', image_file=image_file)
+
+	return render_template('noimage.html')
 
 @app.route('/sad')
 def sad():

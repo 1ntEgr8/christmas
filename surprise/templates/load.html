@@ -46,10 +46,51 @@
 		}
 
 		function display_image(){
-			document.body.innerHTML="<img src='{{url_for('static', filename=image_file)}}'>"
+			document.body.innerHTML=`
+			<div class='alert alert-success' role="alert">
+				<h5 class='d-flex justify-content-center text-dark'>Here is your present!!!</h5>
+			</div>
+			<div class='container d-flex justify-content-center mb-2'>
+				<img src='{{url_for('static', filename=image_file)}}' style='border:0.5rem solid black;'>
+			</div>
+			<div class='container col-1'>
+			<!-- Button trigger modal -->
+			<a href='{{url_for('static', filename=image_file)}}' download><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
+  				Continue
+			</button></a>
+
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  			<div class="modal-dialog modal-dialog-centered" role="document">
+    			<div class="modal-content bg-danger">
+      				<div class="modal-header">
+        				<h5 class="modal-title text-light" id="exampleModalLongTitle">Next Steps</h5>
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          				<span aria-hidden="true">&times;</span>
+        				</button>
+      				</div>
+      			<div class="modal-body">
+        			<div class="modal-body">
+  						<h2 class='text-white'>Spread the joy of Christmas</h2>
+ 						 <h4 class='text-light'> <a href="{{url_for('send')}}" class='badge badge-pill badge-success'>Send a gift</a> to anyone</h4>
+ 						 <h4 class='text-light'> <a href="{{url_for('donate')}}" class='badge badge-pill badge-primary'>Donate $1</a> to xyz organization !</h4>
+  						<hr>
+  						<h2 class='text-white'>Wanna learn how this works?</h2>
+  						<h4 class='text-light'>Check out the <a href="https://www.github.com/1ntEgr8/surprise" class='badge badge-pill badge-info' target='_blank'>github repo</a></h4>
+					</div>
+      			</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+      		</div>
+    		</div>
+ 			</div>
+			</div>
+			</div>
+			`
+
 		}
 
-		myVar = setInterval(change_message, 5000);
+		myVar = setInterval(change_message, 1000);
 
 		
 

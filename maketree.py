@@ -5,8 +5,6 @@ import random
 import time
 import datetime
 import json
-from surprise import db 
-from surprise.models import Creator, Recepient
 
 
 # implement multithreading and fix that issue
@@ -397,6 +395,9 @@ def init_session(creator_name, recepients, id1=1, id2=[1]):
 		# write creator name
 		draw_signature(santa, creator_name)
 
+		# get recepient number
+		# recepient_number = get_recepient_number()
+
 		# store image
 		save_img(santa, id1, id2[counter])
 
@@ -407,6 +408,9 @@ def init_session(creator_name, recepients, id1=1, id2=[1]):
 		hash_code, hash_vector = create_hash(treecolormatrix)
 		store_hash(hash_code, hash_vector, treecolormatrix, id1, id2[counter], t2-t1)	
 		counter+=1
+		
+		# update request data to be stored
+		#recepient_number_list.append(recepient_number)
 
 		santa.clear()
 
