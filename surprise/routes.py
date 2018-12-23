@@ -23,14 +23,14 @@ def about():
 def send():
 	form = RegistrationForm()
 	if form.validate_on_submit():
-		user = Creator(first_name=form.first_name.data, 
-					   last_name=form.last_name.data,
+		user = Creator(first_name=form.first_name.data.title(), 
+					   last_name=form.last_name.data.title(),
 					   email=form.email.data,
 					   request_time=datetime.utcnow())
 		db.session.add(user)
 		db.session.commit()
-		session['first_name'] = form.first_name.data
-		user = Creator.query.filter_by(first_name=form.first_name.data, email=form.email.data).first()
+		session['first_name'] = form.first_name.data.lower()
+		user = Creator.query.filter_by(first_name=form.first_name.data.title(), email=form.email.data)
 		session['user-id'] = user.id
 		flash(f'Santa has got your details {form.first_name.data}! Enter your recepients now ...', 'success')
 		return redirect(url_for('add', name=session['first_name'], user_id=session['user-id']))
@@ -53,7 +53,7 @@ def add():
 				print(names[name])
 				print("ADDING RECEPIENT")
 				date_posted=datetime.utcnow()
-				recepient = Recepient(recepient_name=names[name],
+				recepient = Recepient(recepient_name=names[name].title(),
 									  date_posted=date_posted,
 									 creator_id=session['user-id'])
 				db.session.add(recepient)
@@ -84,7 +84,7 @@ def receive(first_name, user_id):
 	name = user.first_name
 	print(request.method)
 	if request.method == 'POST':
-		entered_name = request.form['recepient_name']
+		entered_name = request.form['recepient_name'].title()
 		recepient = Recepient.query.filter_by(recepient_name=entered_name, creator_id=creator_id).first()
 		if recepient:
 			if recepient.image_created:
@@ -96,7 +96,7 @@ def receive(first_name, user_id):
 	return render_template('receive.html', first_name=name)
 
 @app.route('/load/<string:first_name>/<int:user_id>/<string:recepient_name>/<int:recepient_id>', methods=['GET','POST'])
-def load(first_name, user_id, recepient_name, recepient_id):
+def load(first_name, user_id, recepient_name, recepient_id, methods=['GET','POST']):
 	path = request.path
 	recepientid = path[path.rfind('/')+1:]
 	recepient = Recepient.query.filter_by(id=recepientid).first()
@@ -125,8 +125,9 @@ def promo():
 def thanks():
 	if request.method == 'POST':
 		recepient = Recepient.query.filter_by(id=session['recepient-id']).first()
+		recepient.received = True
 		recepient.thank_you_note = request.form['thanks']
-		if request.form['like'] == 'ok':
+		if request.form.get('like','') == 'ok':
 			recepient.liked = True
 		db.session.commit()
 	return render_template('thanks.html')

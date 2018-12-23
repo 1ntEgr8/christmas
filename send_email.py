@@ -67,4 +67,3 @@ def quit_server(server):
 # }
 
 # send_email_creator(toaddr='eltonp3103@gmail.com', name='Elton', posts=posts)
-
