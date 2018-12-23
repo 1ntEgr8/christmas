@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<div class='jumbotron alert-success'>
+		<h1></h1>
+	</div>
+	<div class='jumbotron bg-success'>
+	<div class='container'>
+		<h3 class='d-flex justify-content-center'>Check out Santa's website!</h3>
+	</div>
+	<div class='container pb-3 pt-3 mb-2'><h3 class='d-flex justify-content-center text-white'>To continue speading the joy of Christmas, <a href="{{url_for('donate')}}" class='ml-2 mr-2 badge badge-pill badge-primary'>donate $1</a> to xyz organisation!</h3></div>
+	<h5 class='d-flex justify-content-center text-white'>Wanna learn how this tool works? Check out the <a href="https://github.com/1ntEgr8/surprise" class='ml-2 mr-2 badge badge-pill badge-info' target='_blank'>github repo</a></h5>
+</div>
+{% endblock %}

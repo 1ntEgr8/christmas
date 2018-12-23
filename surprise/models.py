@@ -22,6 +22,8 @@ class Recepient(db.Model):
 	image_created = db.Column(db.Boolean, default=False)
 	received = db.Column(db.Boolean, default=False)
 	creator_id = db.Column(db.Integer, db.ForeignKey('creator.id'), nullable=False)
+	thank_you_note = db.Column(db.String(1200))
+	liked = db.Column(db.Boolean, default=False)
 
 	def __repr__(self):
 		return f"Recepient('{self.recepient_name}','{self.image_file}','{self.date_posted}, '{self.creator_id}', '{self.image_created}', '{self.received}' )"

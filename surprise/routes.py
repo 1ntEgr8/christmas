@@ -2,7 +2,6 @@ from flask import render_template, url_for, flash, redirect, request, session
 from surprise.forms import RegistrationForm, AddRecepientForm
 from surprise.models import Creator, Recepient
 from surprise import app, db
-from surprise import maketree
 from datetime import datetime
 import hashlib
 import time
@@ -91,31 +90,52 @@ def receive(first_name, user_id):
 			if recepient.image_created:
 				return redirect(url_for('load', first_name=name, user_id=creator_id, recepient_name=entered_name, recepient_id=recepient.id))
 			else:
-				return redirect(url_for('noimage', first_name=name, user_id=creator_id))
+				return redirect(url_for('noimage', first_name=name, user_id=creator_id, recepient_name=entered_name, recepient_id=recepient.id))
 		else:
 			return redirect(url_for('sad'))
 	return render_template('receive.html', first_name=name)
 
-@app.route('/load/<string:first_name>/<int:user_id>/<string:recepient_name>/<int:recepient_id>')
+@app.route('/load/<string:first_name>/<int:user_id>/<string:recepient_name>/<int:recepient_id>', methods=['GET','POST'])
 def load(first_name, user_id, recepient_name, recepient_id):
 	path = request.path
 	recepientid = path[path.rfind('/')+1:]
 	recepient = Recepient.query.filter_by(id=recepientid).first()
 	image_file = recepient.image_file
+	session['recepient-id'] = recepientid
 	return render_template('load.html', image_file=image_file)
 
-@app.route('/noimage/<string:first_name>/<int:user_id>', methods=['GET','POST'])
-def noimage(first_name, user_id):
+@app.route('/noimage/<string:first_name>/<int:user_id>/<string:recepient_name>/<int:recepient_id>', methods=['GET','POST'])
+def noimage(first_name, user_id, recepient_name, recepient_id):
 	path = request.path
-	creator_id = path[path.rfind('/')+1:]
+	recepient_id = path[path.rfind('/')+1:]
 
+	if request.method == 'POST':
+		email = request.form['email']
+		recepient = Recepient.query.filter_by(id=recepient_id).first()
+		recepient.recepient_email=email
+		db.session.commit()
+		return redirect(url_for('promo'))
 	return render_template('noimage.html')
+
+@app.route('/redirect')
+def promo():
+	return render_template('promo.html')
+
+@app.route('/thanks', methods=['GET','POST'])
+def thanks():
+	if request.method == 'POST':
+		recepient = Recepient.query.filter_by(id=session['recepient-id']).first()
+		recepient.thank_you_note = request.form['thanks']
+		if request.form['like'] == 'ok':
+			recepient.liked = True
+		db.session.commit()
+	return render_template('thanks.html')
 
 @app.route('/sad')
 def sad():
 	return render_template('sad.html')
 
-@app.route('/donate', methods=['POST'])
+@app.route('/donate', methods=['GET','POST'])
 def donate():
-	pass
+	return render_template('donate.html')
 	

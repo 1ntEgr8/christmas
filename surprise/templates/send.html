@@ -53,7 +53,7 @@
           {% endfor %}
         </div>
       {% else %}
-      {{ form.first_name(class='form-control', placeholder='Enter your first name') }}
+      {{ form.first_name(class='form-control', placeholder='Type in your first name') }}
       {% endif %}
     </div>
     <div class='form-group col'>
@@ -67,7 +67,7 @@
           {% endfor %}
         </div>
       {% else %}
-        {{ form.last_name(class='form-control', placeholder="Optional, but helps santa uniquely identify your request !") }}
+        {{ form.last_name(class='form-control', placeholder="Enter your last name") }}
       {% endif %}
     </div>
   </div>
@@ -83,7 +83,7 @@
           {% endfor %}
         </div>
       {% else %}
-         {{ form.email(class='form-control', placeholder="santa will keep you notified about your request") }}
+         {{ form.email(class='form-control', placeholder="Santa needs your email to keep you notified") }}
       {% endif %}
      
        <small id="emailHelp" class="form-text text-warning">santa will never share your email with anyone else.</small>

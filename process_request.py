@@ -2,6 +2,7 @@ import maketree
 from surprise import db
 from surprise.models import Creator, Recepient
 import threading
+from send_email import send_email_recepient, start_server # this module will not be available on github 
 
 """ This script will be run alongside the server
 	It will check the database for new request every 30 min 
@@ -42,6 +43,10 @@ def get_recepient_orders():
 def no_order():
 	print("NO ORDER. CHECKING AGAIN")
 
+def send_email():
+	pass
+
+
 
 def get_work_started():
 	counter = 0
@@ -61,6 +66,10 @@ def get_work_started():
 				for recepient in order[1]:
 					complete = Recepient.query.filter_by(id=order[3][counter3]).first()
 					complete.image_created=True
+					# COMMENT THESE TWO LINES WHEN TESTING
+					# if complete.recepient_email:
+					# 	server=start_server()
+					# 	send_email_recepient(server, complete.recepient_name, complete.recepient_email, 'localhost')
 					print(complete)
 					counter3+=1
 					print(f"SUB ORDER {counter3} COMPLETE")

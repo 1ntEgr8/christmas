@@ -4,9 +4,13 @@
 	<div class='jumbotron'>
 		<h1>Woops</h1>
 		<p>Looks like you weren't on the recepient list</p>
-		<p>If your'e still looking for something to make you smile, here's a compilation of some funny videos that 1ntEgr8 enjoys</p>
-		<p>You can always bring hapiness upon yourself by spreading the joy of Christmas</p>
-		<p>Create a gift and send it to your loved ones</p>
-		<p>Donate $1 to xyz organisation</p>
+		<hr>
+		<h2>You can always bring hapiness upon yourself by spreading the joy of Christmas</h2>
+		<br>
+		<h4><a href="{{url_for('send')}}" class='badge badge-pill badge-success'>Send a gift</a> to anyone you want</h4>
+		<h4> <a href="{{url_for('donate')}}" class='mr-2 badge badge-pill badge-primary'>Donate $1</a> to xyz organisation</h4>
+		<br>
+		<h4>If your'e still looking for something to make you smile, here's a <a href='https://www.youtube.com/playlist?list=PL27kJ6FZRnZsDuRDcLR__BWTJbjLRyv3i' class='badge badge-pill badge-danger mr-2 ml-2' target='_blank'>compilation of some funny videos</a>that 1ntEgr8 enjoys</h4>
+		<hr>
 	</div>
 {% endblock %}
