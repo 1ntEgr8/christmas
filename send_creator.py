@@ -28,7 +28,6 @@ def notify():
 			for recepient in recepients_for_creator:
 				if recepient.thank_you_note:
 					posts_to_send[recepient.recepient_name] = recepient.thank_you_note
-
 			send_email_creator(server, creator.first_name, creator.email, posts_to_send)
 			count+=1
 

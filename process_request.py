@@ -1,7 +1,7 @@
 import maketree
 from surprise import db
 from surprise.models import Creator, Recepient
-import threading
+import time
 from send_email import send_email_recepient, start_server, quit_server # this module will not be available on github 
 
 """ This script will be run alongside the server
@@ -63,7 +63,7 @@ def get_work_started():
 					complete = Recepient.query.filter_by(id=order[3][counter3]).first()
 					complete.image_created=True
 					if complete.recepient_email:
-						link = 'https://277a9c04.ngrok.io/receive/' + complete.sender.first_name + '/' + complete.sender.id
+						link = 'http://22982201.ngrok.io/receive/' + complete.sender.first_name + '/' + str(complete.sender.id)
 						send_email_recepient(server, complete.recepient_name, complete.recepient_email, link)
 					print(complete)
 					counter3+=1
@@ -73,7 +73,7 @@ def get_work_started():
 			quit_server(server)
 		else:
 			no_order()
-			threading.Timer(600,no_order)
+			time.sleep(600.0)
 
 get_work_started()
 

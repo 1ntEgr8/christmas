@@ -23,14 +23,14 @@ def about():
 def send():
 	form = RegistrationForm()
 	if form.validate_on_submit():
-		user = Creator(first_name=form.first_name.data.title(), 
-					   last_name=form.last_name.data.title(),
+		user = Creator(first_name=form.first_name.data.title().strip().strip(), 
+					   last_name=form.last_name.data.title().strip().strip(),
 					   email=form.email.data,
 					   request_time=datetime.utcnow())
 		db.session.add(user)
 		db.session.commit()
-		session['first_name'] = form.first_name.data.lower()
-		user = Creator.query.filter_by(first_name=form.first_name.data.title(), email=form.email.data)
+		session['first_name'] = form.first_name.data.title().strip().strip()
+		user = Creator.query.filter_by(first_name=form.first_name.data.title().strip().strip(), email=form.email.data).first()
 		session['user-id'] = user.id
 		flash(f'Santa has got your details {form.first_name.data}! Enter your recepients now ...', 'success')
 		return redirect(url_for('add', name=session['first_name'], user_id=session['user-id']))
@@ -39,10 +39,13 @@ def send():
 @app.route('/add', methods=['GET','POST'])
 def add():
 	user = Creator.query.filter_by(id=session.get('user-id',0)).first()
-	# creator_sender = Recepient.query.filter_by(creator_id=session['user-id']).first().sender
-	# comment this line next time
+	creator_sender = Recepient.query.filter_by(id=session.get('recepient-id',0)).first()
 
-	creator_sender='Elton'
+	if creator_sender:
+		creator_sender='Send one to ' + creator_sender.sender.first_name + '. Type in the name'
+	else:
+		creator_sender=''
+
 	if user and not user.sent:
 		if request.method == 'POST':
 			names = request.form
@@ -53,7 +56,7 @@ def add():
 				print(names[name])
 				print("ADDING RECEPIENT")
 				date_posted=datetime.utcnow()
-				recepient = Recepient(recepient_name=names[name].title(),
+				recepient = Recepient(recepient_name=names[name].title().strip(),
 									  date_posted=date_posted,
 									 creator_id=session['user-id'])
 				db.session.add(recepient)
@@ -73,6 +76,7 @@ def add():
 def link():
 	first_name=session['first_name']
 	user_id=session['user-id']
+	flash(f'Santa has received your order!', 'success')
 	return render_template('link.html',first_name=first_name, user_id=user_id)
 
 @app.route('/receive/<string:first_name>/<int:user_id>', methods=['GET','POST'])
@@ -84,10 +88,11 @@ def receive(first_name, user_id):
 	name = user.first_name
 	print(request.method)
 	if request.method == 'POST':
-		entered_name = request.form['recepient_name'].title()
+		entered_name = request.form['recepient_name'].title().strip()
 		recepient = Recepient.query.filter_by(recepient_name=entered_name, creator_id=creator_id).first()
 		if recepient:
 			if recepient.image_created:
+				session['recepient-id'] = recepient.id
 				return redirect(url_for('load', first_name=name, user_id=creator_id, recepient_name=entered_name, recepient_id=recepient.id))
 			else:
 				return redirect(url_for('noimage', first_name=name, user_id=creator_id, recepient_name=entered_name, recepient_id=recepient.id))
@@ -136,7 +141,7 @@ def thanks():
 def sad():
 	return render_template('sad.html')
 
-@app.route('/donate', methods=['GET','POST'])
-def donate():
-	return render_template('donate.html')
+# @app.route('/donate', methods=['GET','POST'])
+# def donate():
+# 	return render_template('donate.html')
 	

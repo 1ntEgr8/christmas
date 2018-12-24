@@ -2,13 +2,16 @@
 
 {% block body %}
 	<div class='jumbotron alert-success'>
-		<h1></h1>
+		<h1 class='d-flex justify-content-center'>Santa's got your email! You will receive an email when your gift is ready!</h1>
 	</div>
-	<div class='jumbotron bg-success'>
+	<div class='jumbotron bg-success pb-3'>
 	<div class='container'>
-		<h3 class='d-flex justify-content-center'>Check out Santa's website!</h3>
+		<h4 class='text-white d-flex justify-content-center pb-4'><a href="{{url_for('home')}}" class='badge-pill badge-warning mr-2'>Visit</a> the home page for this tool</h4>
 	</div>
-	<div class='container pb-3 pt-3 mb-2'><h3 class='d-flex justify-content-center text-white'>To continue speading the joy of Christmas, <a href="{{url_for('donate')}}" class='ml-2 mr-2 badge badge-pill badge-primary'>donate $1</a> to xyz organisation!</h3></div>
-	<h5 class='d-flex justify-content-center text-white'>Wanna learn how this tool works? Check out the <a href="https://github.com/1ntEgr8/surprise" class='ml-2 mr-2 badge badge-pill badge-info' target='_blank'>github repo</a></h5>
+	<hr>
+		<h5 class='text-white d-flex justify-content-center'>If your'e still looking for something to make you smile, here's a <a href='https://www.youtube.com/playlist?list=PL27kJ6FZRnZsDuRDcLR__BWTJbjLRyv3i' class='badge badge-pill badge-danger mr-2 ml-2' target='_blank'>compilation of some funny videos</a>that 1ntEgr8 enjoys</h5>
+	<hr>
+	<h5 class='d-flex justify-content-center text-white pt-4'>Wanna learn how this tool works? Check out the <a href="https://github.com/1ntEgr8/surprise" class='ml-2 mr-2 badge badge-pill badge-info' target='_blank'>github repo</a></h5>
+	<h6 class='d-flex justify-content-center text-dark pt-3'>Made with ❤️ by 1ntEgr8</h6>
 </div>
 {% endblock %}

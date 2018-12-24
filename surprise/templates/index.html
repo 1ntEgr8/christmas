@@ -18,9 +18,9 @@
       <li class="nav-item">
         <a class="nav-link" href="/send">Send a Gift</a>
       </li>
-      <li class="nav-item">
+     <!--  <li class="nav-item">
         <a class="nav-link" href="/donate">Donate</a>
-      </li>
+      </li> -->
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -39,15 +39,11 @@
     <div class='container d-flex justify-content-center'>
     <a class="btn btn-success btn-lg mt-2" href="{{url_for('send')}}" role="button">Get Started</a>
    </div>
-    <br>
-    <div class='container d-flex justify-content-center'>
-    <a class="btn btn-warning" href="{{url_for('send')}}" role="button">Donate $1 to xyz</a>
-    </div>
   </p>
 </div>
 </div>
 
- <div class='row mr-4 ml-4'>
+ <div class='row  mt-5 mr-4 ml-4'>
 
   <div class="card bg-success col-sm ml-4 pb-4" style="width: 18rem;">
     <div class='container d-flex justify-content-center' style='height: 20rem;'>
@@ -57,7 +53,6 @@
     <h5 class="card-title text-white">So Santa, what's the deal?</h5>
     <p class="card-text text-light">As usual, I want to make Christmas as joyous and cheerful as can be. This time I decided to embrace tech and use it to spread the joy of Christmas. So I teamed up with 1ntEgr8 to build this tool!</p>
   </div>
-  <a href="#" class="btn btn-primary">Go somewhere</a>
 </div>
 
 <div class="card bg-warning col-sm ml-4 pb-4" style="width: 18rem;">
@@ -66,9 +61,8 @@
   <img class="card-img-top" src="{{url_for('static', filename='tree.png')}}" style="height: auto; width: 15rem;" alt="Card image cap">
 </div>
     <h5 class="card-title text-white">But, what exactly does this tool do?</h5>
-    <p class="card-text text-light">Basically, it creates a unique, yes UNIQUE, pixelated image of a christmas tree with a Christmas greeting that contains your name and your'e recepient's name. Kinda like the pic in the card. You can use it to submit a Christmas greeting to at most 10 people! and yes, it FREE(no ads :))</p>
+    <p class="card-text text-light">Basically, it creates a unique, yes UNIQUE, pixelated image of a christmas tree with a Christmas greeting that contains your name and your recepient's name. Kinda like the pic in the card. You can use it to submit a Christmas greeting to at most 10 people! and yes, it's FREE (no ads :))</p>
   </div>
-<a href="#" class="btn btn-primary mt-3">Go somewhere</a>
 </div>
 
 
@@ -78,18 +72,23 @@
 </div>
   <div class="card-body">
     <h5 class="card-title text-white">What's so special about it?</h5>
-    <p class="card-text text-light">a) It's much better than a plain old Merry Christmas message b) It super fast and easy to make use of c) The algorithm ensures that your greeting cards are not only UNIQUE but that each recepient receives a pattern that is based on a UNIQUE pattern created just for you</p>
+    <p class="card-text text-light">
+      <ul class='card-text text-light list-unstyled'>
+    <li class='mb-1'>It's much better than a plain old Merry Christmas text message</li> 
+    <li class='mb-1'>It super fast and easy to use</li>
+    <li class='mb-1'>The algorithm ensures that your greeting cards are not only UNIQUE but that each recepient receives a pattern that is based on a UNIQUE pattern created just for you, thereby giving an added personal touch to your greetings!</li></p>
+  </ul>
   </div>
-  <a href="#" class="btn btn-primary">Go somewhere</a>
 </div>
 </div>
 
 
 <!-- Footer -->
 <footer>
-  <div class='container mb-0'>
-    <div class='row'>
-    </div>
+  <div class='jumbotron bg-danger mb-0 mt-5'>
+  <div class='container mt-2 mb-0'>
+      <h5 class='d-flex justify-content-center text-white'>🎄 Made with ❤️ by 1ntEgr8 🎄</h5>
   </div>
+</div>
 </footer>
 {% endblock %}

@@ -1,27 +1,72 @@
 {% extends 'layout.html' %}
 
 {% block body%}
-	<div class='jumbotron bg-success'>
+	<!-- <div class='jumbotron bg-success'>
 		<h1 class='d-flex justify-content-center text-white'>Santa has received your order!</h1>
 	</div>
 	<div class='jumbotron pb-4 pt-4 bg-white'>
 		<h3 class='d-flex justify-content-center text-black'>Send this link to your recepients</h3>
-	</div>
+	</div> -->
+
+	<div class="container mt-4">
+  <div class='row'>
+  <div class="card col-sm mr-4 bg-success" style="width: 18rem;">
+    <div class='row mt-3' style='height:3rem; width:auto;'>
+  <img class="card-img-top col-sm" src="{{url_for('static', filename='1-black.svg')}}" alt="Card image cap">
+</div>
+  <div class="card-body">
+    <div class='row mt-2 mb-2' style='height:10rem; width:auto;'>
+    <img class='col' src='{{url_for('static', filename='check.svg')}}'>
+    </div>
+</div>
+</div>
+<div class="card col-sm mr-4 bg-success" style="width: 18rem;">
+  <div class='row mt-3' style='height:3rem; width:auto;'>
+  <img class="card-img-top" src="{{url_for('static', filename='2-black.svg')}}" alt="Card image cap">
+</div>
+  <div class="card-body">
+    <div class='row mt-2 mb-2' style='height:10rem; width:auto;'>
+    <img class='col' src='{{url_for('static', filename='check.svg')}}'>
+    </div>
+  </div>
+</div>
+
+<div class="card col-sm bg-warning" style="width: 18rem;">
+  <div class='row mt-3' style='height:3rem; width:auto;'>
+  <img class="card-img-top" src="{{url_for('static', filename='3-black.svg')}}" alt="Card image cap">
+</div>
+  <div class="card-body">
+    <h4 class='text-secondary'>Share the link</h4>
+    <hr>
+    <p class="card-text text-white">Hit the <span class='badge badge-primary'>Copy</span> button to copy the link to your clipboard. Send this to your recepients!</p>
+  </div>
+   <div class='row mt-2 mb-2' style='height:2rem; width:auto;'>
+  <img class="card-img-top col-sm" src="{{url_for('static', filename='chevron-bottom.svg')}}" alt="Card image cap">
+</div>
+</div>
+</div>
+</div>
+
+
 	<div class='jumbotron mt-4 bg-warning'>
 		<div class='container pr-5 pl-5 col-5'>
 		<div class='input-group'>
-		<input id="foo" class='form-control' value='https://277a9c04.ngrok.io/receive/{{first_name}}/{{user_id}}'>
+		<input id="foo" class='form-control' value='http://22982201.ngrok.io/receive/{{first_name}}/{{user_id}}'>
 		<div class="input-group-append" id="button-addon4">
-			<button class="btn btn-primary" data-clipboard-text="https://277a9c04.ngrok.io/receive/{{first_name}}/{{user_id}}">
+			<button class="btn btn-primary" data-clipboard-text="http://22982201.ngrok.io/receive/{{first_name}}/{{user_id}}">
    			 	Copy
 			</button>
 		</div>
 		</div>
 	</div>
 </div>
+
 <div class='jumbotron pt-3 pb-3 bg-success'>
 
-	<div class='container pb-3 pt-3 mb-2'><h3 class='d-flex justify-content-center text-white'>To continue speading the joy of Christmas, <a href="{{url_for('donate')}}" class='ml-2 mr-2 badge badge-pill badge-primary'>donate $1</a> to xyz organisation!</h3></div>
+	<div class='container pb-3 pt-3 mb-2'><h3 class='d-flex justify-content-center text-white'>Spread the joy of Christmas!</h3></div>
+	<h5 class='d-flex justify-content-center text-white'>Return to<a href="{{url_for('home')}}" class='ml-2 mr-2 badge badge-pill badge-danger' target='_blank'>home page</a></h5>
+	<hr>
 	<h5 class='d-flex justify-content-center text-white'>Wanna learn how this tool works? Check out the <a href="https://github.com/1ntEgr8/surprise" class='ml-2 mr-2 badge badge-pill badge-info' target='_blank'>github repo</a></h5>
+  <h6 class='d-flex justify-content-center text-dark pt-3'>Made with ❤️ by 1ntEgr8</h6>
 </div>
 {% endblock%}

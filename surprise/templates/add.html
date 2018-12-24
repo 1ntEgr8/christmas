@@ -2,6 +2,45 @@
 
 {% block body%} 
 
+<div class="container mt-4">
+  <div class='row'>
+  <div class="card col-sm mr-4 bg-success" style="width: 18rem;">
+    <div class='row mt-3' style='height:3rem; width:auto;'>
+  <img class="card-img-top col-sm" src="{{url_for('static', filename='1-black.svg')}}" alt="Card image cap">
+</div>
+  <div class="card-body">
+    <div class='row mt-2 mb-2' style='height:10rem; width:auto;'>
+    <img class='col' src='{{url_for('static', filename='check.svg')}}'>
+    </div>
+</div>
+</div>
+<div class="card col-sm mr-4 bg-warning" style="width: 18rem;">
+  <div class='row mt-3' style='height:3rem; width:auto;'>
+  <img class="card-img-top" src="{{url_for('static', filename='2-black.svg')}}" alt="Card image cap">
+</div>
+  <div class="card-body">
+    <h4 class='text-secondary'>Add recepients</h4>
+    <hr>
+    <p class="card-text text-white">Use the <span class='badge badge-success'>Add</span> and <span class='badge badge-danger'>Remove</span> buttons to, well, add or remove recepients. Santa requires you to have at least 1 recepient for the order to be processed. Also, the maximum number of recepients is 10. Enter wisely!</p>
+  </div>
+  <div class='row mt-2 mb-2' style='height:2rem; width:auto;'>
+  <img class="card-img-top col-sm" src="{{url_for('static', filename='chevron-bottom.svg')}}" alt="Card image cap">
+</div>
+</div>
+
+<div class="card col-sm bg-light" style="width: 18rem;">
+  <div class='row mt-3' style='height:3rem; width:auto;'>
+  <img class="card-img-top" src="{{url_for('static', filename='3-black.svg')}}" alt="Card image cap">
+</div>
+  <div class="card-body">
+    <h4 class='text-secondary'>Share the link</h4>
+    <hr>
+    <p class="card-text">Hit the <span class='badge badge-primary'>Copy</span> button to copy the link to your clipboard. Send this to your recepients!</p>
+  </div>
+</div>
+</div>
+</div>
+
 <div class='container mt-4 mb-5 bg-info'>
     <h1 class='pt-3 pb-3 d-flex justify-content-center text-white'>Recepient List</h1>
 </div>
@@ -10,15 +49,15 @@
 
         <div id='TextBoxesGroup'>
         <div id="TextBoxDiv1" class='form-group'>
-            <input class = 'form-control' type='textbox' id='textbox1' name ='mytext' placeholder="Send one to {{creator_sender}}. Type in the name!">
+            <input class = 'form-control' type='textbox' id='textbox1' name ='mytext' placeholder="{{creator_sender}}">
         </div>
         </div>
         <div class='row'>
             <div class='col'>
-                 <input class ='form-control btn-success' type='button' value='Add' id='addButton'>
+                 <input class ='form-control btn-success' type='button' value='Add one more' id='addButton'>
             </div>
             <div class='col'>
-                 <input  class ='form-control btn-danger'type='button' value='Remove' id='removeButton'>
+                 <input  class ='form-control btn-danger'type='button' value='Remove one' id='removeButton'>
             </div>
         </div>
         <input class ='form-control btn-warning mt-3' type="submit" value="Looks good to me Santa! SUBMIT" id='submit'>

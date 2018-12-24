@@ -18,9 +18,9 @@
       <li class="nav-item">
         <a class="nav-link" href="/send">Send a Gift</a>
       </li>
-      <li class="nav-item">
+     <!--  <li class="nav-item">
         <a class="nav-link" href="/donate">Donate</a>
-      </li>
+      </li> -->
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -28,5 +28,130 @@
     </form>
   </div>
 </nav>
-About
+
+<div class='jumbotron alert-primary'>
+  <h1 class='d-flex justify-content-center'>All you need to know about Santa's newest venture</h1>
+  <hr>
+  <p class='d-flex justify-content-center'>Read on the learn how this tool works, and even see some sample greetings!</p>
+</div> 
+
+<div class='container'>
+
+<div class="card mb-4">
+  <h5 class="card-header">What does this tool do?</h5>
+  <div class="card-body">
+    <p class="card-text">This tool provides you with an easy way to send UNIQUE christmas greetings! It generates a pixelated Christmas Tree greeting and provides users with a shareable link, which recepients can then claim from Santa. The best part about this is that each greeting is UNIQUE and is based on a seed value assigned to you. Your greeting cannot get more personal than that!</p>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <h5 class="card-header">How do I use this tool?</h5>
+  <div class="card-body">
+    <p class="card-text">First, you need to place an order to Santa. All Santa needs is your name, email, and a recepient list. After having placed an order, Santa will provide you with a link which you can then send to your recepients. Recepients can then access your check-in link. They only have to enter their first name to retrieve their gift. It really is that simple!</p>
+    <a href="{{url_for('send')}}" class="btn btn-success">Get Started</a>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <h5 class="card-header">What does the Tree Creation algorithm do?</h5>
+  <div class="card-body">
+    <h5 class="card-title">TL;DR Version</h5>
+    <p class="card-text">There a couple of things that happen in the background to ensure that your greeting card is unique. Once an order is placed, a seed value matrix (which is a list of numbers that map to color combinations for the tree) is created. This is used to generate the greeting for your first recepient. Then this matrix is multiplied by a stochastic matrix to get a new matrix (which is, again, a list of numbers that map to color combinations for the tree). This is then used to create the next tree.</p>
+
+    <h5 class="card-title mt-4">Detailed edition</h5>
+    <div class='row'>
+      <div class="card col" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Obtain the Seed Value Matrix</h5>
+    <h6 class="card-subtitle mb-2 text-muted">What is the seed value matrix</h6>
+    <p class="card-text">This is a 20x20 lower triangular matrix whose values are keys to a color dictionary which contains all of the green shades used in the making of the tree</p>
+    <h6 class="card-subtitle mb-2 text-muted">How do you make it?</h6>
+    <p class="card-text">The Seed Value matrix is made randomly using the random function of python</p>
+    <h6 class="card-subtitle mb-2 text-muted">What do you do with it?</h6>
+    <p class="card-text">This Seed Value matrix is then processed to add bobtails onto the tree, thereby creating a new matrix. This matrix is then used to plot the pixels on the canvas. After adding a couple of finishing touches, your first card is ready!</p>
+  
+  </div>
+</div>
+<div class="card col" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Multiply by thematrix</h5>
+    <h6 class="card-subtitle mb-2 text-muted">What is thematrix?</h6>
+    <p class="card-text">thematrix is a 20x20 stochastix matrix. The modified Seed Value Matrix is multiplied by thematrix to obtain a new 20x20 matrix. You can check out it's values on the github repo</p>
+    <h6 class="card-subtitle mb-2 text-muted">What do you do with this new 20x20 matrix?</h6>
+    <p class="card-text">This new matrix is further processed to ensure only values that map to shades of green exist. Then it is processed to add bobtails.</p>
+    <h6 class="card-subtitle mb-2 text-muted">Why do you need thematrix?</h6>
+     <p class="card-text">thematrix makes it easier for 1ntEgr8 to hash your unique tree color combinations. Further, multiplying by this matrix improves the chances of getting a totally random matrix. Also, it makes sure that all of your greetings stem from your Seed Value Matrix, thereby adding an added level of uniqueness to your card.</p>
+  
+  </div>
+</div>
+<div class="card col" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Make the greeting, then repeat</h5>
+    <h6 class="card-subtitle mb-2 text-muted">What next?</h6>
+    <p class="card-text">This process is continued. All of the matrix data is stored onto a json file.</p>
+<h6 class="card-subtitle mb-2 text-muted">How do you process requests?</h6>
+   <p class="card-text"> A python script is run that checks the database for new requests. It then processes those requests in batches. This helps prevent unecessary lag in content delivery.</p>
+  </div>
+</div>
+    </div>
+    <a href="https://github.com/1ntEgr8/surprise" class="btn btn-info mt-4">Check out the github repo</a>
+  </div>
+
+</div>
+
+<div class="card">
+  <h5 class="card-header">Do you have any samples?</h5>
+  <div class="card-body">
+    <h5 class="card-title">Of course!</h5>
+    <p class="card-text">Here is the evolution of a greeting over the 10 recepients</p>
+    <div class='row''>
+      <img class='col' style='height:15rem; width:5rem;' src='{{url_for('static', filename='1_1.jpg')}}'>
+      <img class='col' style='height:15rem; width:5rem;' src='{{url_for('static', filename='1_2.jpg')}}'>
+      <img class='col' style='height:15rem; width:5rem;' src='{{url_for('static', filename='1_3.jpg')}}'>
+      <img class='col' style='height:15rem; width:5rem;' src='{{url_for('static', filename='1_4.jpg')}}'>
+    </div>
+    <div class='row'>
+      <img class='col' style='height:15rem; width:5rem;' src='{{url_for('static', filename='1_6.jpg')}}'>
+      <img class='col' style='height:15rem; width:5rem;' src='{{url_for('static', filename='1_7.jpg')}}'>
+      <img class='col' style='height:15rem; width:5rem;' src='{{url_for('static', filename='1_8.jpg')}}'>
+      <img class='col' style='height:15rem; width:5rem;' src='{{url_for('static', filename='1_9.jpg')}}'>
+    </div>
+    <div class='row'>
+      <img class='col' style='height:15rem; width:5rem;' src='{{url_for('static', filename='1_5.jpg')}}'>
+      <img class='col' style='height:15rem; width:5rem;' src='{{url_for('static', filename='1_10.jpg')}}'>
+      <div class='col'></div>
+      <div class='col'></div>
+    </div>
+    <a href="{{url_for('send')}}" class="btn btn-success">Create your own greeting</a>
+  </div>
+</div>
+
+<!-- <div class="card">
+  <h5 class="card-header">FAQs</h5>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">This tool provides you with an easy way to send UNIQUE christmas greetings! It generates a pixelated Christmas Tree greeting and provides users with a shareable link, which recepients can then claim from Santa. The best part about this is that each greeting is UNIQUE and is based on a seed value assigned to you. Your greeting cannot get more personal than that!</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
+<div class="card">
+  <h5 class="card-header">How do I use this tool?</h5>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">This tool provides you with an easy way to send UNIQUE christmas greetings! It generates a pixelated Christmas Tree greeting and provides users with a shareable link, which recepients can then claim from Santa. The best part about this is that each greeting is UNIQUE and is based on a seed value assigned to you. Your greeting cannot get more personal than that!</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div> -->
+
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class='jumbotron bg-danger mb-0 mt-5'>
+  <div class='container mt-2 mb-0'>
+      <h5 class='d-flex justify-content-center text-white'>🎄 Made with ❤️ by 1ntEgr8 🎄</h5>
+  </div>
+</div>
+</footer>
 {% endblock %}
