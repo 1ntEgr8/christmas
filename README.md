@@ -1,3 +1,7 @@
+# Surprise
+### Help Santa spread the joy of Christmas!
+#### Send a unique pixelated computer generated Christmas Tree as a christmas greeting!
+
 # What does this tool do?
 
 This tool provides you with an easy way to send UNIQUE christmas greetings! It generates a pixelated Christmas Tree greeting and provides users with a shareable link, which recepients can then claim from Santa. The best part about this is that each 
