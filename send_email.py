@@ -6,7 +6,6 @@ def start_server():
 
 	server.connect("smtp.gmail.com",465)
 
-	server.login('santaklausiscool@gmail.com','evonne1405@USA')
 	return server
 
 def send_email_recepient(server,name, toaddr, link):
