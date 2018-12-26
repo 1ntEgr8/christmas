@@ -27,7 +27,7 @@ This new matrix is further processed to ensure only values that map to shades of
 ### Why do you need thematrix?
 thematrix makes it easier for 1ntEgr8 to hash your unique tree color combinations. Further, multiplying by this matrix improves the chances of getting a totally random matrix. Also, it makes sure that all of your greetings stem from your Seed Value Matrix, thereby adding an added level of uniqueness to your card.
 
-## Make the greetin, then repeat
+## Make the greeting, then repeat
 ### What next?
 This process is continued. All of the matrix data is stored onto a json file.
 ### How do you process requests?
