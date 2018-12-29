@@ -4,16 +4,16 @@
 
 # What does this tool do?
 
-This tool provides you with an easy way to send UNIQUE christmas greetings! It generates a pixelated Christmas Tree greeting and provides users with a shareable link, which recepients can then claim from Santa. The best part about this is that each 
+This tool provides you with an easy way to send UNIQUE christmas greetings! It generates a pixelated Christmas Tree greeting and provides users with a shareable link, which recipients can then claim from Santa. The best part about this is that each 
 greeting is UNIQUE and is based on a seed value assigned to you. Your greeting cannot get more personal than that!
 
 # How do I use this tool?
 
-First, you need to place an order to Santa. All Santa needs is your name, email, and a recepient list. After having placed an order, Santa will provide you with a link which you can then send to your recepients. Recepients can then access your check-in link. They only have to enter their first name to retrieve their gift. It really is that simple!
+First, you need to place an order to Santa. All Santa needs is your name, email, and a recipient list. After having placed an order, Santa will provide you with a link which you can then send to your recipients. Recipients can then access your check-in link. They only have to enter their first name to retrieve their gift. It really is that simple!
 
 # How does the program make the tree?
 
-I have programmed a Tree Creation algorithm. There a couple of things that happen in the background to ensure that your greeting card is unique. Once an order is placed, a seed value matrix (which is a list of numbers that map to color combinations for the tree) is created. This is used to generate the greeting for your first recepient. Then this matrix is multiplied by a stochastic matrix to get a new matrix (which is, again, a list of numbers that map to color combinations for the tree). This is then used to create the next tree.
+I have programmed a Tree Creation algorithm. There a couple of things that happen in the background to ensure that your greeting card is unique. Once an order is placed, a seed value matrix (which is a list of numbers that map to color combinations for the tree) is created. This is used to generate the greeting for your first recipient. Then this matrix is multiplied by a stochastic matrix to get a new matrix (which is, again, a list of numbers that map to color combinations for the tree). This is then used to create the next tree.
 
 ## Obtain the Seed Value Matrix
 ### What is the Seed Value Matrix?
